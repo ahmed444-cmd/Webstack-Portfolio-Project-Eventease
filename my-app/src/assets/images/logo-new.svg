@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="300" height="80" viewBox="0 0 300 80" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <!-- Gradients -->
+    <linearGradient id="redGlow" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#ff0000;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#ff3333;stop-opacity:1" />
+    </linearGradient>
+    
+    <!-- Filters -->
+    <filter id="neonGlow">
+      <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <!-- Animated elements -->
+    <path id="circlePath" d="M 50,25 A 25,25 0 1 1 50,75 A 25,25 0 1 1 50,25" fill="none"/>
+  </defs>
+
+  <!-- Main container with perspective effect -->
+  <g transform="skewX(-10)">
+    <!-- Background shapes -->
+    <path d="M40,10 L260,10 Q280,10 280,30 L280,50 Q280,70 260,70 L40,70 Q20,70 20,50 L20,30 Q20,10 40,10" 
+          fill="#1a1a1a" stroke="#333" stroke-width="2"/>
+    
+    <!-- Red accent elements -->
+    <path d="M40,10 L100,10 L90,70 L40,70 Q20,70 20,50 L20,30 Q20,10 40,10" 
+          fill="url(#redGlow)" filter="url(#neonGlow)"/>
+
+    <!-- Animated circuit lines -->
+    <g stroke="#fff" stroke-width="1" stroke-dasharray="4,4">
+      <path d="M110,20 L130,20 L130,60 L150,60" class="circuit-line">
+        <animate attributeName="stroke-dashoffset" from="8" to="0" dur="1s" repeatCount="indefinite"/>
+      </path>
+      <path d="M170,20 L190,20 L190,40 L210,40" class="circuit-line">
+        <animate attributeName="stroke-dashoffset" from="8" to="0" dur="1s" repeatCount="indefinite"/>
+      </path>
+    </g>
+
+    <!-- Main text with effects -->
+    <g filter="url(#neonGlow)">
+      <text x="100" y="45" font-family="Arial Black, sans-serif" font-size="32" fill="white">
+        Event<tspan fill="url(#redGlow)">Ease</tspan>
+      </text>
+    </g>
+
+    <!-- Dynamic icon -->
+    <g transform="translate(45, 40)">
+      <!-- Outer ring -->
+      <circle cx="0" cy="0" r="15" fill="none" stroke="url(#redGlow)" stroke-width="2">
+        <animate attributeName="r" values="15;17;15" dur="2s" repeatCount="indefinite"/>
+      </circle>
+      
+      <!-- Inner elements -->
+      <circle cx="0" cy="0" r="8" fill="#fff">
+        <animate attributeName="opacity" values="0.5;1;0.5" dur="1s" repeatCount="indefinite"/>
+      </circle>
+      <circle cx="0" cy="0" r="4" fill="url(#redGlow)"/>
+      
+      <!-- Rotating dots -->
+      <g>
+        <circle cx="12" cy="0" r="2" fill="#fff">
+          <animateTransform attributeName="transform" type="rotate" from="0 0 0" to="360 0 0" dur="3s" repeatCount="indefinite"/>
+        </circle>
+        <circle cx="-12" cy="0" r="2" fill="#fff">
+          <animateTransform attributeName="transform" type="rotate" from="180 0 0" to="540 0 0" dur="3s" repeatCount="indefinite"/>
+        </circle>
+      </g>
+    </g>
+
+    <!-- Decorative elements -->
+    <g stroke="#fff" stroke-width="1.5">
+      <line x1="250" y1="25" x2="270" y2="25">
+        <animate attributeName="x2" values="270;275;270" dur="1s" repeatCount="indefinite"/>
+      </line>
+      <line x1="250" y1="40" x2="270" y2="40">
+        <animate attributeName="x2" values="270;275;270" dur="1s" repeatCount="indefinite" begin="0.3s"/>
+      </line>
+      <line x1="250" y1="55" x2="270" y2="55">
+        <animate attributeName="x2" values="270;275;270" dur="1s" repeatCount="indefinite" begin="0.6s"/>
+      </line>
+    </g>
+  </g>
+
+  <!-- Pulse effect overlay -->
+  <circle cx="45" cy="40" r="20" fill="url(#redGlow)" opacity="0.2">
+    <animate attributeName="r" values="20;25;20" dur="2s" repeatCount="indefinite"/>
+    <animate attributeName="opacity" values="0.2;0.1;0.2" dur="2s" repeatCount="indefinite"/>
+  </circle>
+</svg>

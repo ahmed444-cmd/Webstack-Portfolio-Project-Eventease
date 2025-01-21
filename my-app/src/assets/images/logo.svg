@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="200" height="60" viewBox="0 0 200 60" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+        <!-- Gradients -->
+        <linearGradient id="primaryGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" style="stop-color:#4F46E5;stop-opacity:1" />
+            <stop offset="100%" style="stop-color:#818CF8;stop-opacity:1" />
+        </linearGradient>
+        <linearGradient id="accentGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" style="stop-color:#F472B6;stop-opacity:1" />
+            <stop offset="100%" style="stop-color:#EC4899;stop-opacity:1" />
+        </linearGradient>
+        <!-- Filters for glow effects -->
+        <filter id="glow">
+            <feGaussianBlur stdDeviation="1" result="coloredBlur"/>
+            <feMerge>
+                <feMergeNode in="coloredBlur"/>
+                <feMergeNode in="SourceGraphic"/>
+            </feMerge>
+        </filter>
+    </defs>
+    
+    <g id="EventEase-Logo" filter="url(#glow)">
+        <!-- Calendar Icon Base -->
+        <rect x="15" y="10" width="30" height="35" rx="4" fill="url(#primaryGradient)"/>
+        
+        <!-- Calendar Top -->
+        <rect x="15" y="10" width="30" height="8" rx="4" fill="url(#accentGradient)"/>
+        
+        <!-- Calendar Dots (representing days) -->
+        <circle cx="25" y="25" r="2" fill="white"/>
+        <circle cx="35" y="25" r="2" fill="white"/>
+        <circle cx="25" y="35" r="2" fill="white"/>
+        <circle cx="35" y="35" r="2" fill="white"/>
+        
+        <!-- Dynamic Lines representing flow/ease -->
+        <path d="M50 25 C60 25, 65 35, 75 35" stroke="url(#primaryGradient)" stroke-width="3" fill="none"/>
+        <path d="M50 30 C60 30, 65 40, 75 40" stroke="url(#accentGradient)" stroke-width="2" fill="none"/>
+        
+        <!-- Text "EventEase" with modern styling -->
+        <text x="80" y="38" font-family="'Segoe UI', Arial, sans-serif" font-weight="600" font-size="24" fill="currentColor">
+            <tspan fill="url(#primaryGradient)">Event</tspan>
+            <tspan fill="url(#accentGradient)">Ease</tspan>
+        </text>
+    </g>
+    
+    <!-- Decorative elements -->
+    <circle cx="185" y="20" r="3" fill="url(#primaryGradient)" opacity="0.6">
+        <animate attributeName="r" values="3;4;3" dur="2s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="175" y="30" r="2" fill="url(#accentGradient)" opacity="0.4">
+        <animate attributeName="r" values="2;3;2" dur="1.5s" repeatCount="indefinite"/>
+    </circle>
+</svg>
