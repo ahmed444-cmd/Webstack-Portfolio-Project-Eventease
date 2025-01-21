@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Design Mockup</title>
+    <style>
+        :root {
+            --primary-color: #000000;
+            --accent-color: #FF0000;
+            --background-color: #FFFFFF;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--background-color);
+            color: var(--primary-color);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            background-color: var(--primary-color);
+            padding: 20px 0;
+            color: var(--background-color);
+        }
+
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 20px;
+        }
+
+        .nav-links a {
+            color: var(--background-color);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-color);
+        }
+
+        .hero {
+            text-align: center;
+            padding: 80px 0;
+            background-color: var(--primary-color);
+            color: var(--background-color);
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            padding: 40px 0;
+        }
+
+        .card {
+            background: var(--background-color);
+            border: 2px solid var(--primary-color);
+            border-radius: 8px;
+            padding: 20px;
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover {
+            border-color: var(--accent-color);
+            transform: translateY(-5px);
+        }
+
+        .button {
+            background-color: var(--accent-color);
+            color: var(--background-color);
+            padding: 12px 24px;
+            border-radius: 6px;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s ease;
+            border: none;
+        }
+
+        .button:hover {
+            background-color: var(--primary-color);
+            color: var(--background-color);
+        }
+
+        .contact-section {
+            background-color: var(--background-color);
+            padding: 60px 0;
+            color: var(--primary-color);
+        }
+
+        .contact-section h2 {
+            text-align: center;
+            margin-bottom: 40px;
+            color: var(--primary-color);
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+        }
+
+        .contact-form form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid var(--primary-color);
+            border-radius: 4px;
+            background-color: var(--background-color);
+            color: var(--primary-color);
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--accent-color);
+        }
+
+        .contact-form button {
+            background-color: var(--accent-color);
+            color: var(--background-color);
+            border: none;
+            cursor: pointer;
+        }
+
+        .contact-form button:hover {
+            background-color: var(--primary-color);
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        .info-item {
+            padding: 20px;
+            background-color: var(--background-color);
+            border: 2px solid var(--primary-color);
+            border-radius: 8px;
+        }
+
+        .info-item h3 {
+            color: var(--accent-color);
+            margin-bottom: 10px;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .nav {
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <nav class="nav">
+                <div class="logo">
+                    <h2>Event Platform</h2>
+                </div>
+                <div class="nav-links">
+                    <a href="#events">Events</a>
+                    <a href="#speakers">Speakers</a>
+                    <a href="#schedule">Schedule</a>
+                    <a href="#faq">FAQ</a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <h1>Welcome to Our Event Platform</h1>
+            <p>Join us for amazing events and workshops</p>
+            <a href="#events" class="button">Explore Events</a>
+        </div>
+    </section>
+
+    <main class="container">
+        <div class="grid">
+            <div class="card">
+                <h3>Upcoming Events</h3>
+                <p>Browse through our exciting lineup of events</p>
+            </div>
+            <div class="card">
+                <h3>Featured Speakers</h3>
+                <p>Learn from industry experts and thought leaders</p>
+            </div>
+            <div class="card">
+                <h3>Event Schedule</h3>
+                <p>Plan your day with our detailed schedule</p>
+            </div>
+        </div>
+    </main>
+
+    <section class="contact-section">
+        <div class="container">
+            <h2>Contact Us</h2>
+            <div class="contact-grid">
+                <div class="contact-form">
+                    <form>
+                        <div class="form-group">
+                            <input type="text" placeholder="Your Name" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="email" placeholder="Your Email" required>
+                        </div>
+                        <div class="form-group">
+                            <textarea placeholder="Your Message" rows="4" required></textarea>
+                        </div>
+                        <button type="submit" class="button">Send Message</button>
+                    </form>
+                </div>
+                <div class="contact-info">
+                    <div class="info-item">
+                        <h3>Email</h3>
+                        <p>contact@example.com</p>
+                    </div>
+                    <div class="info-item">
+                        <h3>Phone</h3>
+                        <p>+1 234 567 890</p>
+                    </div>
+                    <div class="info-item">
+                        <h3>Address</h3>
+                        <p>123 Event Street<br>City, Country</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+</html>
