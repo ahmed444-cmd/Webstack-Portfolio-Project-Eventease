@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EventEase - Tech Conference 2024</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <img src="logo.png" alt="EventEase Logo">
+            </div>
+            <div class="nav-links">
+                <a href="#home" data-i18n="nav_home">Home</a>
+                <a href="#about" data-i18n="nav_about">About</a>
+                <a href="#schedule" data-i18n="nav_schedule">Schedule</a>
+                <a href="#speakers" data-i18n="nav_speakers">Speakers</a>
+                <a href="#sponsors" data-i18n="nav_sponsors">Sponsors</a>
+                <a href="#faq" data-i18n="nav_faq">FAQ</a>
+                <a href="#contact" data-i18n="nav_contact">Contact</a>
+            </div>
+            <div class="nav-buttons">
+                <div class="lang-switcher">
+                    <button class="lang-toggle">
+                        <img src="https://flagcdn.com/w20/gb.png" alt="Current Language" class="lang-flag">
+                        <span class="current-lang">English</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="lang-dropdown">
+                        <button class="lang-option" data-lang="en">
+                            <img src="https://flagcdn.com/w20/gb.png" alt="English" class="lang-flag">
+                            <span>English</span>
+                        </button>
+                        <button class="lang-option" data-lang="fr">
+                            <img src="https://flagcdn.com/w20/fr.png" alt="Français" class="lang-flag">
+                            <span>Français</span>
+                        </button>
+                        <button class="lang-option" data-lang="es">
+                            <img src="https://flagcdn.com/w20/es.png" alt="Español" class="lang-flag">
+                            <span>Español</span>
+                        </button>
+                    </div>
+                </div>
+                <button class="theme-toggle">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <button class="mobile-menu">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1 data-i18n="hero_title">EventEase Tech Conference 2024</h1>
+            <p class="tagline" data-i18n="hero_tagline">Shaping the Future of Technology</p>
+            <p class="date" data-i18n="hero_date">September 15-17, 2024 • Silicon Valley</p>
+            <button class="cta-button" data-i18n="hero_cta">Register Now</button>
+        </div>
+    </section>
+
+    <section id="about" class="about">
+        <h2 data-i18n="about_title">About The Conference</h2>
+        <div class="about-content">
+            <div class="about-text">
+                <p data-i18n="about_text">Join us for three days of cutting-edge technology, inspiring speakers, and networking opportunities. EventEase brings together industry leaders, innovators, and tech enthusiasts to explore the latest trends in AI, Web Development, Cloud Computing, and more.</p>
+            </div>
+            <div class="stats">
+                <div class="stat-item">
+                    <h3>3</h3>
+                    <p data-i18n="about_days">Days</p>
+                </div>
+                <div class="stat-item">
+                    <h3>50+</h3>
+                    <p data-i18n="about_speakers">Speakers</p>
+                </div>
+                <div class="stat-item">
+                    <h3>1000+</h3>
+                    <p data-i18n="about_attendees">Attendees</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="schedule" class="schedule">
+        <h2 data-i18n="schedule_title">Conference Schedule</h2>
+        <div class="schedule-tabs">
+            <button class="tab-button active" data-day="1" data-i18n="schedule_day1">Day 1</button>
+            <button class="tab-button" data-day="2" data-i18n="schedule_day2">Day 2</button>
+            <button class="tab-button" data-day="3" data-i18n="schedule_day3">Day 3</button>
+        </div>
+        <div class="schedule-content active" id="day1">
+            <div class="schedule-item">
+                <div class="time">9:00 AM</div>
+                <div class="event">
+                    <h3 data-i18n="schedule_opening_keynote">Opening Keynote</h3>
+                    <p data-i18n="schedule_opening_keynote_description">The Future of AI in Enterprise</p>
+                </div>
+            </div>
+            <!-- More schedule items -->
+        </div>
+        <!-- Day 2 and 3 content will be populated via JavaScript -->
+    </section>
+
+    <section id="speakers" class="speakers">
+        <h2 data-i18n="speakers_title">Featured Speakers</h2>
+        <div class="speakers-grid">
+            <div class="speaker-card">
+                <div class="speaker-image">
+                    <img src="https://via.placeholder.com/200" alt="Jane Doe">
+                </div>
+                <h3 data-i18n="speaker_jane_doe">Jane Doe</h3>
+                <p data-i18n="speaker_jane_doe_description">AI Research Director, Tech Corp</p>
+            </div>
+            <!-- More speaker cards -->
+        </div>
+    </section>
+
+    <section id="sponsors" class="sponsors">
+        <h2 data-i18n="sponsors_title">Our Sponsors</h2>
+        <div class="sponsor-grid">
+            <div class="sponsor-logo">
+                <img src="https://via.placeholder.com/150" alt="Sponsor 1">
+            </div>
+            <!-- More sponsor logos -->
+        </div>
+    </section>
+
+    <section id="faq" class="faq">
+        <h2 data-i18n="faq_title">Frequently Asked Questions</h2>
+        <div class="faq-container">
+            <div class="faq-item">
+                <div class="faq-question" data-i18n="faq_question1">What's included in the ticket price?</div>
+                <div class="faq-answer" data-i18n="faq_answer1">Your ticket includes access to all conference sessions, workshops, networking events, lunch, and refreshments for all three days.</div>
+            </div>
+            <!-- More FAQ items -->
+        </div>
+    </section>
+
+    <section id="contact" class="contact">
+        <h2 data-i18n="contact_title">Contact Us</h2>
+        <form class="contact-form">
+            <div class="form-group">
+                <input type="text" id="name" required placeholder="Your Name" data-i18n="contact_name_placeholder">
+            </div>
+            <div class="form-group">
+                <input type="email" id="email" required placeholder="Your Email" data-i18n="contact_email_placeholder">
+            </div>
+            <div class="form-group">
+                <textarea id="message" required placeholder="Your Message" data-i18n="contact_message_placeholder"></textarea>
+            </div>
+            <button type="submit" class="submit-button" data-i18n="contact_submit_button">Send Message</button>
+        </form>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3 data-i18n="footer_eventease">EventEase</h3>
+                <p data-i18n="footer_description">Join us for the most innovative tech conference of 2024</p>
+            </div>
+            <div class="footer-section">
+                <h3 data-i18n="footer_quick_links">Quick Links</h3>
+                <a href="#home" data-i18n="footer_home">Home</a>
+                <a href="#about" data-i18n="footer_about">About</a>
+                <a href="#schedule" data-i18n="footer_schedule">Schedule</a>
+            </div>
+            <div class="footer-section">
+                <h3 data-i18n="footer_follow_us">Follow Us</h3>
+                <div class="social-links">
+                    <a href="#" data-i18n="footer_twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="#" data-i18n="footer_linkedin"><i class="fab fa-linkedin"></i></a>
+                    <a href="#" data-i18n="footer_instagram"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p data-i18n="footer_copyright">&copy; 2024 EventEase. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="translations.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
