@@ -22,9 +22,20 @@ const Register = () => {
     }
     
     try {
-      // This is a mock registration - replace with your actual registration logic
       if (email && password) {
-        // Simulate successful registration
+        // Store user credentials in localStorage
+        const users = JSON.parse(localStorage.getItem('registeredUsers') || '[]');
+        const userExists = users.some(user => user.email === email);
+        
+        if (userExists) {
+          setError('User with this email already exists');
+          return;
+        }
+
+        users.push({ email, password, role: 'user' });
+        localStorage.setItem('registeredUsers', JSON.stringify(users));
+        
+        // Log the user in after successful registration
         login({ email, role: 'user' });
         navigate('/user/dashboard');
       } else {
