@@ -1,37 +1,33 @@
 import React, { useState } from 'react';
 import { useAuth } from '../contexts/AuthContext';
+import { useEvents } from '../contexts/EventContext';
+import EventForm from './EventForm';
 import EventCalendar from './EventCalendar';
 
 const UserDashboard = () => {
   const { user, logout } = useAuth();
+  const { events, pendingEvents, deleteEvent } = useEvents();
   const [activeTab, setActiveTab] = useState('myEvents');
-  
-  const [userEvents, setUserEvents] = useState([
-    { id: 1, title: 'Tech Conference 2024', date: '2024-06-15', status: 'registered' },
-    { id: 2, title: 'AI Workshop', date: '2024-07-01', status: 'interested' }
-  ]);
+  const [showEventForm, setShowEventForm] = useState(false);
+  const [selectedEvent, setSelectedEvent] = useState(null);
+
+  const userEvents = events.filter(event => event.userId === user.email);
+  const userPendingEvents = pendingEvents.filter(event => event.userId === user.email);
 
   const handleLogout = () => {
     logout();
     window.location.href = '/login';
   };
 
-  const handleEventStatusChange = (eventId, newStatus) => {
-    setUserEvents(events =>
-      events.map(event =>
-        event.id === eventId ? { ...event, status: newStatus } : event
-      )
-    );
+  const handleEditEvent = (event) => {
+    setSelectedEvent(event);
+    setShowEventForm(true);
   };
 
-  const handleDateSelect = (eventId, newDate) => {
-    setUserEvents(events =>
-      events.map(event =>
-        event.id === eventId 
-          ? { ...event, date: newDate.toISOString().split('T')[0] }
-          : event
-      )
-    );
+  const handleDeleteEvent = (eventId, isPending) => {
+    if (window.confirm('Are you sure you want to delete this event?')) {
+      deleteEvent(eventId, isPending);
+    }
   };
 
   return (
@@ -49,10 +45,10 @@ const UserDashboard = () => {
             My Events
           </button>
           <button
-            className={`tab-button ${activeTab === 'profile' ? 'active' : ''}`}
-            onClick={() => setActiveTab('profile')}
+            className={`tab-button ${activeTab === 'pendingEvents' ? 'active' : ''}`}
+            onClick={() => setActiveTab('pendingEvents')}
           >
-            Profile
+            Pending Events
           </button>
         </div>
         <button onClick={handleLogout} className="logout-button">
@@ -60,51 +56,74 @@ const UserDashboard = () => {
         </button>
       </nav>
 
-      <div className="dashboard-content">
-        {activeTab === 'myEvents' && (
-          <div className="my-events">
-            <h3>My Events</h3>
-            <div className="events-list">
-              {userEvents.map(event => (
+      <main className="dashboard-content">
+        <div className="content-header">
+          <h3>{activeTab === 'myEvents' ? 'My Events' : 'Pending Events'}</h3>
+          <button
+            className="btn-primary"
+            onClick={() => {
+              setSelectedEvent(null);
+              setShowEventForm(true);
+            }}
+          >
+            Create New Event
+          </button>
+        </div>
+
+        {showEventForm && (
+          <div className="modal">
+            <EventForm
+              event={selectedEvent}
+              onClose={() => {
+                setShowEventForm(false);
+                setSelectedEvent(null);
+              }}
+            />
+          </div>
+        )}
+
+        <div className="events-list">
+          {activeTab === 'myEvents' ? (
+            userEvents.length > 0 ? (
+              userEvents.map(event => (
                 <div key={event.id} className="event-card">
                   <h4>{event.title}</h4>
-                  <div className="calendar-wrapper">
-                    <EventCalendar
-                      events={[event]}
-                      onEventClick={() => {}}
-                      onDateSelect={(date) => handleDateSelect(event.id, date)}
-                      selectable={true}
-                      initialDate={event.date}
-                      isSmall={true}
-                    />
-                  </div>
+                  <p>{event.description}</p>
+                  <p>Date: {new Date(event.date).toLocaleDateString()}</p>
+                  <p>Time: {event.time}</p>
+                  <p>Location: {event.location}</p>
                   <p>Status: {event.status}</p>
                   <div className="event-actions">
-                    <select
-                      value={event.status}
-                      onChange={(e) => handleEventStatusChange(event.id, e.target.value)}
-                      className="status-select"
-                    >
-                      <option value="interested">Interested</option>
-                      <option value="registered">Registered</option>
-                      <option value="attended">Attended</option>
-                    </select>
+                    <button onClick={() => handleEditEvent(event)}>Edit</button>
+                    <button onClick={() => handleDeleteEvent(event.id, false)}>Delete</button>
                   </div>
                 </div>
-              ))}
-            </div>
-          </div>
-        )}
-        
-        {activeTab === 'profile' && (
-          <div className="profile-section">
-            <h3>Profile</h3>
-            <div className="profile-info">
-              <p><strong>Email:</strong> {user.email}</p>
-            </div>
-          </div>
-        )}
-      </div>
+              ))
+            ) : (
+              <p>No approved events yet</p>
+            )
+          ) : (
+            userPendingEvents.length > 0 ? (
+              userPendingEvents.map(event => (
+                <div key={event.id} className="event-card">
+                  <h4>{event.title}</h4>
+                  <p>{event.description}</p>
+                  <p>Date: {new Date(event.date).toLocaleDateString()}</p>
+                  <p>Time: {event.time}</p>
+                  <p>Location: {event.location}</p>
+                  <p>Status: {event.status}</p>
+                  <div className="event-actions">
+                    <button onClick={() => handleEditEvent(event)}>Edit</button>
+                    <button onClick={() => handleDeleteEvent(event.id, true)}>Delete</button>
+                  </div>
+                </div>
+              ))
+            ) : (
+              <p>No pending events</p>
+            )
+          )}
+        </div>
+      </main>
     </div>
   );
 };
