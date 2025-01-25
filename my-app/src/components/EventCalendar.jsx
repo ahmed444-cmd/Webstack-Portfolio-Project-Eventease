@@ -28,11 +28,24 @@ const EventCalendar = ({
     events: events.map(event => ({
       id: event.id,
       title: event.title,
-      start: event.date,
-      allDay: true,
-      classNames: ['event-item']
+      start: `${event.date}T${event.time || '00:00:00'}`,
+      description: event.description,
+      location: event.location,
+      allDay: !event.time,
+      classNames: ['event-item', event.status]
     })),
-    eventClick: info => onEventClick?.(info.event),
+    eventClick: info => {
+      if (onEventClick) {
+        onEventClick({
+          id: info.event.id,
+          title: info.event.title,
+          date: info.event.start,
+          time: info.event.start.toLocaleTimeString(),
+          description: info.event.extendedProps.description,
+          location: info.event.extendedProps.location
+        });
+      }
+    },
     selectable: selectable,
     select: info => onDateSelect?.(info.start),
     height: isSmall ? 300 : 'auto',
@@ -46,6 +59,10 @@ const EventCalendar = ({
       dayGrid: {
         dayMaxEvents: isSmall ? 1 : 3
       }
+    },
+    eventDidMount: (info) => {
+      // Add tooltip with event details
+      info.el.title = `${info.event.title}\n${info.event.extendedProps.description || ''}\n${info.event.extendedProps.location || ''}`;
     }
   };
 
