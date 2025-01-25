@@ -1,58 +1,40 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import EventCalendar from './EventCalendar';
 import EventModal from './EventModal';
-import * as mockApi from '../services/mockApi';
+import { useEvents } from '../contexts/EventContext';
 
 const Schedule = () => {
-  const [events, setEvents] = useState([]);
+  const { events } = useEvents();
   const [selectedEvent, setSelectedEvent] = useState(null);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    const fetchEvents = async () => {
-      try {
-        const eventsData = await mockApi.getCalendarEvents();
-        setEvents(eventsData);
-      } catch (error) {
-        console.error('Failed to fetch events:', error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchEvents();
-  }, []);
+  
+  // Filter only approved events
+  const approvedEvents = events.filter(event => event.status === 'approved').map(event => ({
+    id: event.id,
+    title: event.title,
+    date: event.date,
+    time: event.time,
+    description: event.description,
+    location: event.location,
+    registered: 0, // Initialize with 0 registrations
+  }));
 
   const handleEventClick = (event) => {
     setSelectedEvent(event);
   };
 
-  const handleRegister = async (eventId) => {
-    try {
-      const result = await mockApi.registerForEvent(eventId);
-      if (result.success) {
-        // Update the events list with the new registration count
-        setEvents(prevEvents =>
-          prevEvents.map(event =>
-            event.id === eventId
-              ? { ...event, registered: event.registered + 1 }
-              : event
-          )
-        );
-      }
-    } catch (error) {
-      console.error('Failed to register for event:', error);
-    }
+  const handleCloseModal = () => {
+    setSelectedEvent(null);
   };
 
-  if (loading) {
-    return (
-      <div className="schedule-loading">
-        <div className="loading-spinner"></div>
-        <p>Loading schedule...</p>
-      </div>
+  const handleRegister = async (eventId) => {
+    // Update the events list with the new registration
+    const updatedEvents = approvedEvents.map(event =>
+      event.id === eventId
+        ? { ...event, registered: (event.registered || 0) + 1 }
+        : event
     );
-  }
+    // You might want to store registrations in a separate context or localStorage
+  };
 
   return (
     <section id="schedule" className="schedule">
@@ -85,16 +67,19 @@ const Schedule = () => {
 
         <div className="calendar-wrapper">
           <EventCalendar
-            events={events}
+            events={approvedEvents}
             onEventClick={handleEventClick}
+            selectable={false}
           />
         </div>
 
-        <EventModal
-          event={selectedEvent}
-          onClose={() => setSelectedEvent(null)}
-          onRegister={handleRegister}
-        />
+        {selectedEvent && (
+          <EventModal
+            event={selectedEvent}
+            onClose={handleCloseModal}
+            onRegister={() => handleRegister(selectedEvent.id)}
+          />
+        )}
       </div>
     </section>
   );
