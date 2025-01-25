@@ -16,12 +16,21 @@ const Login = () => {
     setError('');
     
     try {
-      // This is a mock login - replace with your actual authentication logic
+      // Get registered users from localStorage
+      const users = JSON.parse(localStorage.getItem('registeredUsers') || '[]');
+      
+      // Check if admin credentials
       if (email === 'admin@example.com' && password === 'admin123') {
         login({ email, role: 'admin' });
         navigate('/admin/dashboard');
-      } else if (email === 'user@example.com' && password === 'user123') {
-        login({ email, role: 'user' });
+        return;
+      }
+      
+      // Check registered user credentials
+      const user = users.find(u => u.email === email && u.password === password);
+      
+      if (user) {
+        login({ email: user.email, role: user.role });
         navigate('/user/dashboard');
       } else {
         setError('Invalid credentials');
