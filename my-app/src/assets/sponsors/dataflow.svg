@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="300" height="100" viewBox="0 0 300 100" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="flowGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#f1c40f"/>
+      <stop offset="100%" style="stop-color:#f39c12"/>
+    </linearGradient>
+  </defs>
+  <g transform="translate(20, 20)">
+    <!-- Data flow symbol -->
+    <path d="M20,30 L40,10 L60,30 L40,50 Z" fill="url(#flowGradient)"/>
+    <circle cx="40" cy="30" r="5" fill="#fff"/>
+    <!-- Company name -->
+    <text x="80" y="35" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#2c3e50">
+      DataFlow
+    </text>
+  </g>
+</svg>
