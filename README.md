@@ -72,16 +72,3 @@ The project uses a mock API to fetch dynamic data. Here are the endpoints:
 - Implement a real backend for live data handling.
 - Add advanced animations for better user engagement.
 
-## How to Contribute
-
-1. Fork the repository.
-2. Create a new branch for your feature or bug fix:
-   ```bash
-   git checkout -b feature-name
-   ```
-3. Commit your changes and push the branch:
-   ```bash
-   git add .
-   git commit -m "Description of changes"
-   git push origin feature-name
-    ```
