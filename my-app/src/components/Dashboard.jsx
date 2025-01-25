@@ -84,6 +84,10 @@ const Dashboard = () => {
           </div>
         </div>
         <div className="dashboard-actions">
+          <button className="action-button create-event">
+            <FontAwesomeIcon icon={faCalendarAlt} />
+            Create Event
+          </button>
           <button className="action-button">
             <FontAwesomeIcon icon={faCog} />
             Settings
